@@ -70,7 +70,7 @@ Como Case2 se divide em duas partes, foi criado um indice na lateral esquerda do
 ##### PARTE 1 
 
 A PARTE 1 se divide em quatro partes, sendo elas:
-* PARTE 1.1: Configuracao do ambiente: Aqui como boa prática é executado um notebook a parte onde ficam as configurações de ambiente como:
+* PARTE 1.1: Configuracao do ambiente: Aqui como boa prática é executado um notebook a parte onde ficam as configurações de ambiente, ou seja dentro do notebook Case2_GB_Final ele chama um outro notebook chamado Case2_GB_Config_Ambiente para setar coisas importantes no ambiente como:
   * Instalação da biblioteca **tweepy** que será usada na PARTE 2 para a interação com a API do Twitter.
   * Informações das Secret keys do Twitter.
   * Criação dos databases onde serão criadas as tabelas consumidas no script.
