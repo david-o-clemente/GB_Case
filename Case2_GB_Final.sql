@@ -103,11 +103,6 @@ CREATE WIDGET TEXT Refined_Zone  DEFAULT 'Gold';
 
 -- COMMAND ----------
 
-select count(*) from ${Raw_Data_Zone}.Base
---DESC EXTENDED ${Raw_Data_Zone}.BASE;
-
--- COMMAND ----------
-
 -- DBTITLE 1,Tempo de execucao total Raw Data Zone
 -- MAGIC %python
 -- MAGIC 
@@ -162,16 +157,16 @@ USING (SELECT
              ,CHAVE_EXTRACT_BASES
 
        FROM (SELECT DISTINCT
-                    ID_MARCA
-                   ,MARCA
-                   ,ID_LINHA
-                   ,LINHA
-                   ,DATA_VENDA                         
-                   ,QTD_VENDA
-                   ,SISTEMA_ORIG
-                   ,TIPO_ARQV_ORIG
-                   ,DT_HR_PROC
-                   ,CHAVE_EXTRACT_BASES
+                    INT(ID_MARCA)                    AS ID_MARCA
+                   ,MARCA                            AS MARCA
+                   ,INT(ID_LINHA)                    AS ID_LINHA
+                   ,LINHA                            AS LINHA
+                   ,TO_DATE(DATA_VENDA,'yyyy-MM-dd') AS DATA_VENDA
+                   ,INT(QTD_VENDA)                   AS QTD_VENDA
+                   ,SISTEMA_ORIG                     AS SISTEMA_ORIG
+                   ,TIPO_ARQV_ORIG                   AS TIPO_ARQV_ORIG
+                   ,TIMESTAMP(DT_HR_PROC)            AS DT_HR_PROC
+                   ,CHAVE_EXTRACT_BASES              AS CHAVE_EXTRACT_BASES
                    ,ROW_NUMBER() OVER (PARTITION BY CHAVE_EXTRACT_BASES ORDER BY CHAVE_EXTRACT_BASES ) AS CORTE_DUP
                                            
              FROM ${Raw_Data_Zone}.BASE )
@@ -182,13 +177,47 @@ USING (SELECT
 
 WHEN NOT MATCHED THEN INSERT * ;
 
-SELECT COUNT(*) FROM ${Trusted_Zone}.BASE;
+--SELECT COUNT(*) FROM ${Trusted_Zone}.BASE;
 
---SELECT * FROM ${Trusted_Zone}.BASE;
+SELECT * FROM ${Trusted_Zone}.BASE;
 
 -- COMMAND ----------
 
-SELECT * FROM ${Trusted_Zone}.BASE;
+SELECT
+*
+FROM ${Raw_Data_Zone}.BASE
+WHERE CHAVE_EXTRACT_BASES  ='5-BELEZA NA WEB-3-MAQUIAGEM-2019-06-14-11-EMAIL'
+
+-- COMMAND ----------
+
+SELECT * FROM (
+SELECT
+        ID_MARCA
+       ,MARCA
+       ,ID_LINHA
+       ,LINHA
+       ,DATA_VENDA
+       ,QTD_VENDA
+       ,SISTEMA_ORIG
+       ,TIPO_ARQV_ORIG
+       ,DT_HR_PROC
+       ,CHAVE_EXTRACT_BASES
+       ,ROW_NUMBER() OVER (PARTITION BY CHAVE_EXTRACT_BASES ORDER BY CHAVE_EXTRACT_BASES ) AS CORTE_DUP
+                                           
+FROM ${Raw_Data_Zone}.BASE )
+
+WHERE (CORTE_DUP) > 1
+
+-- COMMAND ----------
+
+SELECT 
+ (SELECT COUNT(*) FROM ${Raw_Data_Zone}.BASE) AS COUNT_BRONZE_BASES
+,(SELECT COUNT(*) FROM ${Trusted_Zone}.BASE)  AS COUNT_SILVER_BASES
+
+FROM ${Raw_Data_Zone}.BASE
+    ,${Trusted_Zone}.BASE
+
+GROUP BY COUNT_BRONZE_BASES,COUNT_SILVER_BASES
 
 -- COMMAND ----------
 
@@ -320,7 +349,7 @@ LIMIT 1;
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC FIM DO PROCESSO
+-- MAGIC FIM DO PROCESSO PARTE 1
 
 -- COMMAND ----------
 
@@ -355,7 +384,7 @@ LIMIT 1;
 -- MAGIC 
 -- MAGIC cliente = tw.Client(bearer_token, consumer_key, consumer_secret, access_token)
 -- MAGIC 
--- MAGIC tweets = cliente.search_recent_tweets(query=query_list, user_fields=['username','name'], tweet_fields = 'text', expansions = 'author_id')#, max_results = 100)
+-- MAGIC tweets = cliente.search_recent_tweets(query=query_list, user_fields=['username','name'], tweet_fields = 'text', expansions = 'author_id', max_results = 50)
 -- MAGIC 
 -- MAGIC # Get users list from the includes object
 -- MAGIC users = {u["id"]: u for u in tweets.includes['users']}
@@ -394,6 +423,11 @@ FROM ${Refined_Zone}.TWITTER_API_GB
 -- MAGIC final_parte_2 = datetime.now()
 -- MAGIC duracao_parte_2 = final_parte_2 - inicio_parte_2
 -- MAGIC print(duracao_parte_2)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC FIM DO PROCESSO PARTE 2
 
 -- COMMAND ----------
 
