@@ -240,6 +240,12 @@ Consulta na tabela GOLD.TWITTER_API_GB para visualiação dos resultados obtidos
 <div align="center">
 <img src="https://user-images.githubusercontent.com/98194507/216859948-26cb5c8b-b4b2-47a6-8a26-49c7f126cac7.png" width="1000px" />
 </div>
+<br />
+
+Segue o desenho da arquitetura criada:
+<div align="center">
+<img src="https://user-images.githubusercontent.com/98194507/217001590-3c3af420-eaa8-4237-a0df-0e430317134f.png" width="1000px" />
+</div>
 
 
 ##### FIM DO PROCESSO.
