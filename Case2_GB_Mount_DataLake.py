@@ -1,4 +1,12 @@
 # Databricks notebook source
+dbutils.fs.mkdirs("/mnt/gb/email")
+
+# COMMAND ----------
+
+dbutils.fs.ls("/mnt/gb/email")
+
+# COMMAND ----------
+
 client_id = "7d2bfde3-b52c-426a-80a0-7feab0982ddc"
 client_secret = "muQ8Q~~Pl0rAYSUQKJroZyWiAc6pepdcWWms1dxa"
 client_endpoint = "https://login.microsoftonline.com/12de17f8-7229-421f-8ee3-b9387494e0c3/oauth2/token"
