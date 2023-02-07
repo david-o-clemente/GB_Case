@@ -124,7 +124,7 @@ CREATE WIDGET TEXT Refined_Zone  DEFAULT 'Gold';
 
 -- COMMAND ----------
 
--- DBTITLE 1,DDL - ${Trusted_Zone}.BASE  *Rodar somente na primeira execução*
+-- DBTITLE 1,DDL - ${Trusted_Zone}.BASE
 CREATE TABLE IF NOT EXISTS ${Trusted_Zone}.BASE ( ID_MARCA INT,
                                                   MARCA STRING,
                                                   ID_LINHA INT,
@@ -183,13 +183,6 @@ SELECT * FROM ${Trusted_Zone}.BASE;
 
 -- COMMAND ----------
 
--- SELECT
--- *
--- FROM ${Raw_Data_Zone}.BASE
--- WHERE CHAVE_EXTRACT_BASES  ='5-BELEZA NA WEB-3-MAQUIAGEM-2019-06-14-11-EMAIL'
-
--- COMMAND ----------
-
 -- SELECT * FROM (
 -- SELECT
 --         ID_MARCA
@@ -207,6 +200,13 @@ SELECT * FROM ${Trusted_Zone}.BASE;
 -- FROM ${Raw_Data_Zone}.BASE )
 
 -- WHERE (CORTE_DUP) > 1
+
+-- COMMAND ----------
+
+-- SELECT
+-- *
+-- FROM ${Raw_Data_Zone}.BASE
+-- WHERE CHAVE_EXTRACT_BASES  ='5-BELEZA NA WEB-3-MAQUIAGEM-2019-06-14-11-EMAIL'
 
 -- COMMAND ----------
 
