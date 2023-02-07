@@ -227,7 +227,7 @@ Criação da tabela  **GOLD.TWITTER_API_GB** usando os dados da variavel **data*
 
 * PARTE 2.2: **Tabela Final Twitter**
 
-Consulta na tabela GOLD.TWITTER_API_GB para visualiação dos resultados obtidos:
+Commit via Databricks
 <br />
 <div align="center">
 <img src="https://user-images.githubusercontent.com/98194507/216859621-a176eddf-fbe3-410d-aa5f-3f841cb3fd3a.png" width="1000px" />
@@ -235,11 +235,17 @@ Consulta na tabela GOLD.TWITTER_API_GB para visualiação dos resultados obtidos
 <br />
 
 > É possivel obter o tempo de processamento de cada etapa do script, no final de cada parte tem a variavel **duracao_total**.<br />
-> Segue tempo atual de execução total do script principal:
+> Segue tempo atual de execução total do script principal:<br />
 <br />
 <div align="center">
 <img src="https://user-images.githubusercontent.com/98194507/216859948-26cb5c8b-b4b2-47a6-8a26-49c7f126cac7.png" width="1000px" />
 </div>
+
+Segue imagem da arquitetura de solução do Case2:<br />
+<div align="center">
+<img src="https://user-images.githubusercontent.com/98194507/217128779-9f34d57d-00a8-43fc-a4c3-26a23d5d45c1.png" width="1000px" />
+</div>
+
 
 
 ##### FIM DO PROCESSO.
